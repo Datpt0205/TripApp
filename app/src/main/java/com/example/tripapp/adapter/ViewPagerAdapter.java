@@ -24,7 +24,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 0:return new FragmentHome();
             case 1:return new FragmentHistory();
             case 2:return new FragmentSearch();
-//            default:new FragmentHome();
         }
         return null;
     }

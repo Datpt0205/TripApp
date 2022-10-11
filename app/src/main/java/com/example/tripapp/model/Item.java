@@ -4,25 +4,27 @@ import java.io.Serializable;
 
 public class Item implements Serializable {
     private int id;
-    private String title, category, price, date;
+    private String name, destination, date, risk, description;
 
     public Item(){
 
     }
 
-    public Item(int id, String title, String category, String price, String date){
+    public Item(int id, String name, String destination, String date, String risk, String description){
         this.id = id;
-        this.title = title;
-        this.category = category;
-        this.price = price;
+        this.name = name;
+        this.destination = destination;
+        this.risk = risk;
         this.date = date;
+        this.description = description;
     }
 
-    public Item(String title, String category, String price, String date){
-        this.title = title;
-        this.category = category;
-        this.price = price;
+    public Item(String name, String destination, String risk, String date,String description){
+        this.name = name;
+        this.destination = destination;
+        this.risk = risk;
         this.date = date;
+        this.description = description;
     }
 
     public int getId(){
