@@ -1,74 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/mainLayout">
+    android:layout_margin="3dp"
+    app:cardCornerRadius="5dp"
+    android:id="@+id/mainLayout"
+    android:background="@color/blueUse">
 
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp">
+        android:orientation="horizontal"
+        android:weightSum="4">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="12dp">
-
-            <TextView
-                android:id="@+id/trip_id_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1"
-                android:textColor="#000"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:orientation="vertical"
+            android:layout_weight="1">
 
             <TextView
                 android:id="@+id/trip_name_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="Summer Vacation"
-                app:layout_constraintStart_toEndOf="@+id/trip_id_txt"
-                app:layout_constraintTop_toTopOf="@+id/trip_id_txt" />
+                android:layout_marginLeft="10dp"
+                android:text="Fall 2022"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/trip_destination_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Da Nang"
-                app:layout_constraintStart_toStartOf="@+id/trip_name_txt"
-                app:layout_constraintTop_toBottomOf="@+id/trip_name_txt" />
+                android:layout_marginLeft="10dp"
+                android:text="Da Nang" />
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/trip_date_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="10/10/2022"
+            android:textColor="@color/blueUse" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <TextView
+            android:id="@+id/trip_risk_txt"
+            android:layout_weight="1"
+            android:text="Risk assessment: Yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/trip_description_txt"
+            android:layout_weight="1"
+            android:text="Description: This is the best planning"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/trip_date_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginEnd="32dp"
-                android:text="02/05/2001"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/trip_name_txt"
-                app:layout_constraintTop_toTopOf="@+id/trip_name_txt"
-                tools:ignore="MissingConstraints" />
-
-            <TextView
-                android:id="@+id/trip_risk_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="9dp"
-                android:text="Require Assessment: Yes"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/trip_date_txt"
-                app:layout_constraintTop_toTopOf="@+id/trip_destination_txt" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-</LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

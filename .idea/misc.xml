@@ -4,7 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/layout/activity_main.xml" value="0.22" />
-        <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/layout/fragment_history.xml" value="0.10144927536231885" />
+        <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/layout/activity_update_and_delete.xml" value="0.10144927536231885" />
+        <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/layout/fragment_history.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/layout/fragment_search.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/layout/item.xml" value="0.22" />
