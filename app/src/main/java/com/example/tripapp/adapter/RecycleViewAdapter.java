@@ -44,7 +44,6 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     @Override
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
         Item item = list.get(position);
-//        holder.id.setText(item.getId());
         holder.name.setText(item.getName());
         holder.destination.setText(item.getDestination());
         holder.date.setText(item.getDate());
@@ -58,10 +57,9 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     }
 
     public class HomeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        private TextView id, name, destination, date, risk, description;
+        private TextView name, destination, date, risk, description;
         public HomeViewHolder(@NonNull View view) {
             super(view);
-//            id = view.findViewById(R.id.trip_id_txt);
             name = view.findViewById(R.id.trip_name_txt);
             destination = view.findViewById(R.id.trip_destination_txt);
             date = view.findViewById(R.id.trip_date_txt);

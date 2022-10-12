@@ -70,4 +70,81 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("description", i.getDescription());
         return sqLiteDatabase.insert("items", null, values);
     }
+    //Get items by Date
+    public List<Item> getByDate(String date){
+        List<Item> list = new ArrayList<>();
+        String whereClause = "date like?";
+        String[] whereArgs = {date};
+        SQLiteDatabase st = getReadableDatabase();
+         Cursor rs = st.query("items", null, whereClause, whereArgs, null,null,null);
+         while (rs != null && rs.moveToNext()){
+             int id = rs.getInt(0);
+             String name= rs.getString(1);
+             String destination= rs.getString(2);
+             String risk= rs.getString(3);
+             String description= rs.getString(4);
+             list.add(new Item(id,name, destination,date, risk, description));
+         }
+        return list;
+    }
+    //update
+    public int update(Item i){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("name", i.getName());
+        values.put("destination", i.getDestination());
+        values.put("date", i.getDate());
+        values.put("risk", i.getRisk());
+        values.put("description", i.getDescription());
+        String whereClause = "id = ?";
+        String[] whereArgs = {Integer.toString(i.getId())};
+        return sqLiteDatabase.update("items", values, whereClause, whereArgs);
+    }
+    //delete
+    public int delete(int id){
+        String whereClause = "id = ?";
+        String[] whereArgs = {Integer.toString(id)};
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        return sqLiteDatabase.delete("items", whereClause, whereArgs);
+    }
+
+    //Search by key word
+    public List<Item> searchByKey(String key){
+        List<Item> list = new ArrayList<>();
+        String whereClause = "name like ?";
+        String[] whereArgs = {"%"+key+"%"};
+        SQLiteDatabase st = getReadableDatabase();
+        Cursor rs = st.query("items", null, whereClause, whereArgs, null,null,null);
+        while (rs != null && rs.moveToNext()){
+            int id = rs.getInt(0);
+            String name= rs.getString(1);
+            String destination= rs.getString(2);
+            String risk= rs.getString(3);
+            String description= rs.getString(4);
+            String date = rs.getString(5);
+            list.add(new Item(id,name, destination,date, risk, description));
+        }
+        return list;
+    }
+
+    //Search by date
+    public List<Item> searchByDate(String from, String to){
+        List<Item> list = new ArrayList<>();
+        String whereClause = "date BETWEEN ? AND ?";
+        String[] whereArgs = {from.trim(), to.trim()};
+        SQLiteDatabase st = getReadableDatabase();
+        Cursor rs = st.query("items", null, whereClause, whereArgs, null,null,null);
+        while (rs != null && rs.moveToNext()){
+            int id = rs.getInt(0);
+            String name= rs.getString(1);
+            String destination= rs.getString(2);
+            String risk= rs.getString(3);
+            String description= rs.getString(4);
+            String date = rs.getString(5);
+            list.add(new Item(id, name, destination, date, risk, description));
+        }
+        return list;
+    }
+
+
 }
