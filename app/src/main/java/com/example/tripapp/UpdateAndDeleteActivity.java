@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.tripapp.database.DatabaseHelper;
@@ -83,16 +84,16 @@ public class UpdateAndDeleteActivity extends AppCompatActivity implements View.O
             String date = eDate.getText().toString();
             String risk = eRisk.getText().toString();
             String description = eDescription.getText().toString();
-            if(!name.isEmpty() && !destination.isEmpty() && !date.isEmpty() && !risk.isEmpty()){
+            if(!name.isEmpty() && !destination.isEmpty() && !date.isEmpty() && !risk.isEmpty()) {
                 int id=item.getId();
                 Item i = new Item(id, name, destination, date, risk, description);
                 DatabaseHelper db = new DatabaseHelper(this);
                 db.update(i);
                 finish();
+            }
             }else{
                 Toast.makeText(UpdateAndDeleteActivity.this, "You need input all information", Toast.LENGTH_SHORT ).show();
             }
-        }
             if(view==btnDelete){
                 int id=item.getId();
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());

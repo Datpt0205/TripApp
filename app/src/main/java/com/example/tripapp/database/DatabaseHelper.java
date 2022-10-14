@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Button;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -43,8 +46,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<Item> getAll(){
         List<Item> list = new ArrayList<>();
         SQLiteDatabase st = getReadableDatabase();
-        //Date giảm dần, mới nhất thì lên trên
-        String order= "date DESC";
+        String order= "date ASC";
         Cursor rs = st.query("items", null, null,
                 null, null,null, order);
         while(rs != null && rs.moveToNext()){
@@ -65,11 +67,41 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put("name", i.getName());
         values.put("destination", i.getDestination());
-        values.put("date", i.getDate());
-        values.put("risk", i.getRisk());
+        values.put("date", i.getRisk());
+        values.put("risk", i.getDate());
         values.put("description", i.getDescription());
-        return sqLiteDatabase.insert("items", null, values);
+        long target = sqLiteDatabase.insert("items", null, values);
+        if (target == -1)
+        {
+            Toast.makeText(context, "Failed to add", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(context, "Added Success", Toast.LENGTH_SHORT).show();
+        }
+        return target;
     }
+
+//    //Show message add
+//    public void showMess(Item item){
+//        if(btnAdd.isChecked()){
+//            AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+//            builder.setMessage("Name:"+item.getName()+"\n"+
+//                        "Destination:"+item.getDestination()+"\n"+
+//                        "Date of trip:"+item.getDate()+"\n"+
+//                        "Risk assessment"+item.getRisk()+"\n"+
+//                        "Description:"+item.getDescription());
+//                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        finish();
+//                    }
+//                });
+//                AlertDialog dialog = builder.create();
+//                dialog.show();
+//        }
+//    }
+
     //Get items by Date
     public List<Item> getByDate(String date){
         List<Item> list = new ArrayList<>();

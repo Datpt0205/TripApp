@@ -62,9 +62,10 @@ public class FragmentHome extends Fragment implements RecycleViewAdapter.ItemLis
     @Override
     public void onResume() {
         super.onResume();
-        Date d = new Date();
-        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-        List<Item> list= db.getByDate(f.format(d));
+//        Date d = new Date();
+//        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
+//        List<Item> list= db.getByDate(f.format(d));
+        List<Item> list = db.getAll();
         adapter.setList(list);
     }
 }

@@ -1,15 +1,15 @@
 package com.example.tripapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.tripapp.database.DatabaseHelper;
 import com.example.tripapp.model.Item;
@@ -19,6 +19,8 @@ import java.util.Calendar;
 public class AddActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText eName, eDestination, eDate, eRisk, eDescription;
     private Button btnAdd, btnCancel;
+    private Item item;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +44,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        if(view == eDate){
+        if (view == eDate) {
             final Calendar c = Calendar.getInstance();
             int year = c.get(Calendar.YEAR);
             int month = c.get(Calendar.MONTH);
@@ -51,32 +53,42 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
                 @Override
                 public void onDateSet(DatePicker datePicker, int y, int m, int d) {
                     String date = "";
-                    if(m >8){
-                        date= d+"/"+(m+1)+"/"+y;
-                    }else{
-                        date= d+"/0"+(m+1)+"/"+y;
+                    if (m > 8) {
+                        date = d + "/" + (m + 1) + "/" + y;
+                    } else {
+                        date = d + "/0" + (m + 1) + "/" + y;
                     }
                     eDate.setText(date);
                 }
-            },year, month, day);
+            }, year, month, day);
             dialog.show();
         }
-        if(view==btnCancel){
+        if (view == btnCancel) {
             finish();
         }
-        if(view == btnAdd){
+        if (view == btnAdd) {
             String name = eName.getText().toString();
             String destination = eDestination.getText().toString();
             String date = eDate.getText().toString();
             String risk = eRisk.getText().toString();
             String description = eDescription.getText().toString();
-            if(!name.isEmpty() && !destination.isEmpty() && !date.isEmpty() && !risk.isEmpty()){
+            if (!name.isEmpty() && !destination.isEmpty() && !date.isEmpty() && !risk.isEmpty()) {
                 Item i = new Item(name, destination, date, risk, description);
                 DatabaseHelper db = new DatabaseHelper(this);
                 db.addItem(i);
                 finish();
-            }else{
-                Toast.makeText(AddActivity.this, "You need input all information", Toast.LENGTH_SHORT ).show();
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                builder.setTitle("Add Planning");
+                builder.setMessage("You need to fill all required fields.");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        return;
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         }
     }
