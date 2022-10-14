@@ -130,7 +130,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("description", i.getDescription());
         String whereClause = "id = ?";
         String[] whereArgs = {Integer.toString(i.getId())};
-        return sqLiteDatabase.update("items", values, whereClause, whereArgs);
+        int target2 = sqLiteDatabase.update("items", values, whereClause, whereArgs);
+        if(target2 == -1){
+            Toast.makeText(context, "Failed to Update", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(context, "Updated Success", Toast.LENGTH_SHORT).show();
+        }
+        return target2;
     }
     //delete
     public int delete(int id){

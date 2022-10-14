@@ -73,10 +73,35 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
             String risk = eRisk.getText().toString();
             String description = eDescription.getText().toString();
             if (!name.isEmpty() && !destination.isEmpty() && !date.isEmpty() && !risk.isEmpty()) {
-                Item i = new Item(name, destination, date, risk, description);
-                DatabaseHelper db = new DatabaseHelper(this);
-                db.addItem(i);
-                finish();
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                builder.setTitle("Add Planning");
+                builder.setMessage("Name: "+name+"\n"+
+                        "Destination: "+destination+"\n"+
+                        "Date of trip: "+date+"\n"+
+                        "Risk assessment: "+risk+"\n"+
+                        "Description: "+description);
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Item item = new Item(name, destination, date, risk, description);
+                        DatabaseHelper db = new DatabaseHelper(getApplicationContext());
+                        db.addItem(item);
+                        finish();
+                        return;
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        return;
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+//                Item i = new Item(name, destination, date, risk, description);
+//                DatabaseHelper db = new DatabaseHelper(this);
+//                db.addItem(i);
+//                finish();
             } else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                 builder.setTitle("Add Planning");
