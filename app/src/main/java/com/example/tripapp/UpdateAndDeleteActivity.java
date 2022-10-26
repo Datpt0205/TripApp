@@ -99,9 +99,9 @@ public class UpdateAndDeleteActivity extends AppCompatActivity implements View.O
                 DatabaseHelper db = new DatabaseHelper(this);
                 db.update(i);
                 finish();
-            }
             }else{
                 Toast.makeText(UpdateAndDeleteActivity.this, "You need input all information", Toast.LENGTH_SHORT ).show();
+            }
             }
             if(view==btnDelete){
                 int id=item.getId();

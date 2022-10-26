@@ -4,7 +4,7 @@
         android:title="TODAY"
         android:icon="@drawable/ic_baseline_home_24"/>
     <item android:id="@+id/myHistory"
-        android:title="HISTORY"
+        android:title="UPLOAD"
         android:icon="@drawable/ic_baseline_history_24"/>
     <item android:id="@+id/mySearch"
         android:title="SEARCH"

@@ -10,16 +10,26 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tripapp.adapter.ViewPagerAdapter;
 import com.example.tripapp.database.DatabaseHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.io.IOException;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView navigationView;
@@ -29,6 +39,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        if (android.os.Build.VERSION.SDK_INT > 9) {
+//            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+//            StrictMode.setThreadPolicy(policy);
+//        }
+//        TextView textView = findViewById(R.id.respond);
+//        findViewById(R.id.send).setOnClickListener(click -> {
+//            Request.Builder builder = new Request.Builder();
+//            Request request = builder
+//                    .url("https://cwservice1786.herokuapp.com/sendPayLoad")
+//                    .get()
+//                    .build();
+//            OkHttpClient client = new OkHttpClient().newBuilder().build();
+//
+//            try{
+//                Response respond = client.newCall(request).execute();
+//                assert request.body() != null;
+//                textView.setText(request.body().toString());
+//            }catch(IOException e){
+//                e.printStackTrace();
+//            }
+//        });
+
         navigationView = findViewById(R.id.bottom_nav);
         viewPager = findViewById(R.id.viewPaper);
         fab = findViewById(R.id.fab);
