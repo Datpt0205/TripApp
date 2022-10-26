@@ -11,7 +11,7 @@
         android:layout_height="100dp">
         <TextView
             android:layout_marginTop="10dp"
-            android:text="PLAN TRIP FOR TODAY"
+            android:text="Expense Detail"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="@color/white"
@@ -20,13 +20,12 @@
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_marginTop="-20dp"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/expenseView2"
+        android:layout_marginTop="-20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

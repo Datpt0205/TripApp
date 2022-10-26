@@ -14,16 +14,16 @@ public class Item implements Serializable {
         this.id = id;
         this.name = name;
         this.destination = destination;
-        this.risk = risk;
         this.date = date;
+        this.risk = risk;
         this.description = description;
     }
 
-    public Item(String name, String destination, String risk, String date,String description){
+    public Item(String name, String destination, String date, String risk,String description){
         this.name = name;
         this.destination = destination;
-        this.risk = risk;
         this.date = date;
+        this.risk = risk;
         this.description = description;
     }
 

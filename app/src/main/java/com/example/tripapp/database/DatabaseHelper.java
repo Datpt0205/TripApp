@@ -2,11 +2,11 @@ package com.example.tripapp.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Button;
-import android.view.View;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -29,11 +29,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE items(Id INTEGER PRIMARY KEY AUTOINCREMENT ," +
                 "name TEXT, destination TEXT, date TEXT, risk TEXT, description TEXT)");
+
+        db.execSQL("CREATE TABLE expense(Id INTEGER PRIMARY KEY AUTOINCREMENT , " +
+                " type TEXT, time TEXT, amount INTEGER, tripId INTEGER, FOREIGN KEY (tripId) " +
+                " REFERENCES items (Id))");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS items");
+        db.execSQL("DROP TABLE IF EXISTS expense");
         onCreate(db);
     }
 
@@ -42,7 +47,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super.onOpen(db);
     }
 
-    //Get all order by date descending
+    //Get all order by date ascending
     public List<Item> getAll(){
         List<Item> list = new ArrayList<>();
         SQLiteDatabase st = getReadableDatabase();
@@ -61,14 +66,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return list;
     }
+    //Add expense
+    public long addExpense(String tripId, String type, String amount, String time){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("type", type);
+        cv.put("amount", amount);
+        cv.put("time", time);
+        cv.put("tripId", tripId);
+        long target_expense = sqLiteDatabase.insert("expense", null, cv);
+        if(target_expense == -1){
+            Toast.makeText(context, "Failed to add", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(context, "Added Success", Toast.LENGTH_SHORT).show();
+        }
+        return target_expense;
+    }
     //Add
     public long addItem(Item i){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("name", i.getName());
         values.put("destination", i.getDestination());
-        values.put("date", i.getRisk());
-        values.put("risk", i.getDate());
+        values.put("date", i.getDate());
+        values.put("risk", i.getRisk());
         values.put("description", i.getDescription());
         long target = sqLiteDatabase.insert("items", null, values);
         if (target == -1)
@@ -82,25 +105,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return target;
     }
 
-//    //Show message add
-//    public void showMess(Item item){
-//        if(btnAdd.isChecked()){
-//            AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-//            builder.setMessage("Name:"+item.getName()+"\n"+
-//                        "Destination:"+item.getDestination()+"\n"+
-//                        "Date of trip:"+item.getDate()+"\n"+
-//                        "Risk assessment"+item.getRisk()+"\n"+
-//                        "Description:"+item.getDescription());
-//                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        finish();
-//                    }
-//                });
-//                AlertDialog dialog = builder.create();
-//                dialog.show();
-//        }
-//    }
+    //get expense Data
+    public Cursor expenseData(String _id){
+        String query = "SELECT * FROM " + "expense" + " WHERE " + "tripId" + "='" + _id + "'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(query,null);
+        }
+        return cursor;
+    }
 
     //Get items by Date
     public List<Item> getByDate(String date){
@@ -145,7 +159,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String whereClause = "id = ?";
         String[] whereArgs = {Integer.toString(id)};
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
-        return sqLiteDatabase.delete("items", whereClause, whereArgs);
+        int deleteSuccess = sqLiteDatabase.delete("items", whereClause, whereArgs);
+        if(deleteSuccess == -1){
+            Toast.makeText(context, "Failed to Deleted", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            Toast.makeText(context, "Deleted Success", Toast.LENGTH_SHORT).show();
+        }
+        return deleteSuccess;
+    }
+
+    public void deleteAll(){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        sqLiteDatabase.execSQL(" DELETE FROM " + "items");
+//        int deleteAllSuccess = sqLiteDatabase.delete("items", null, null);
+//        if(deleteAllSuccess == -1){
+//            Toast.makeText(context, "Failed to Deleted", Toast.LENGTH_SHORT).show();
+//        }
+//        else
+//        {
+//            Toast.makeText(context, "Deleted Success", Toast.LENGTH_SHORT).show();
+//        }
+//        return deleteAllSuccess;
     }
 
     //Search by key word

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
 
 import com.example.tripapp.database.DatabaseHelper;
 import com.example.tripapp.model.Item;
@@ -19,7 +20,7 @@ import java.util.Calendar;
 public class AddActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText eName, eDestination, eDate, eRisk, eDescription;
     private Button btnAdd, btnCancel;
-    private Item item;
+//    private RadioButton yesRadio, noRadio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,8 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         eDescription = findViewById(R.id.addDescription);
         btnAdd = findViewById(R.id.btnAdd);
         btnCancel = findViewById(R.id.btnCancel);
-
+//        yesRadio = findViewById(R.id.yesRadio);
+//        noRadio = findViewById(R.id.noRadio);
     }
 
     @Override
@@ -67,10 +69,16 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
             finish();
         }
         if (view == btnAdd) {
-            String name = eName.getText().toString();
+            String name = eName.getText() .toString();
             String destination = eDestination.getText().toString();
             String date = eDate.getText().toString();
             String risk = eRisk.getText().toString();
+//            String chRadio = "";
+//            if(yesRadio.isChecked()){
+//                chRadio = "Risk Assessment: Yes";
+//            }else if(noRadio.isChecked()){
+//                chRadio = "Risk Assessment: No";
+//            }
             String description = eDescription.getText().toString();
             if (!name.isEmpty() && !destination.isEmpty() && !date.isEmpty() && !risk.isEmpty()) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
@@ -98,10 +106,6 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
                 });
                 AlertDialog dialog = builder.create();
                 dialog.show();
-//                Item i = new Item(name, destination, date, risk, description);
-//                DatabaseHelper db = new DatabaseHelper(this);
-//                db.addItem(i);
-//                finish();
             } else {
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                 builder.setTitle("Add Planning");

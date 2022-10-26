@@ -5,13 +5,20 @@
       <map>
         <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.1295" />
         <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/layout/activity_add.xml" value="0.22" />
+        <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/layout/activity_add_expense.xml" value="0.22" />
+        <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/layout/activity_epense.xml" value="0.11277173913043478" />
+        <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/layout/activity_expense.xml" value="0.11277173913043478" />
+        <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/layout/activity_expense2.xml" value="0.11277173913043478" />
         <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/layout/activity_update_and_delete.xml" value="0.22" />
+        <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/layout/expense.xml" value="0.22" />
+        <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/layout/fragment_expense.xml" value="0.15172101449275363" />
         <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/layout/fragment_history.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/layout/fragment_search.xml" value="0.22" />
         <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/layout/item.xml" value="0.22" />
         <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/layout/item_spinner.xml" value="0.10144927536231885" />
+        <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/menu/my_menu.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/menu/navigation.xml" value="0.17552083333333332" />
         <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.139" />
         <entry key="..\:/Users/ADMIN/TripApp/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.139" />

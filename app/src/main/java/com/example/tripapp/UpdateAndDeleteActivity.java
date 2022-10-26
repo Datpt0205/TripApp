@@ -2,7 +2,6 @@ package com.example.tripapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.tripapp.database.DatabaseHelper;
@@ -22,7 +20,7 @@ import java.util.Calendar;
 
 public class UpdateAndDeleteActivity extends AppCompatActivity implements View.OnClickListener{
     private EditText eName, eDestination, eDate, eRisk, eDescription;
-    private Button btnAdd, btnBack, btnDelete;
+    private Button btnAdd, btnBack, btnDelete, seeExpense;
     private Item item;
 
     @Override
@@ -34,6 +32,17 @@ public class UpdateAndDeleteActivity extends AppCompatActivity implements View.O
         btnAdd.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
         eDate.setOnClickListener(this);
+        seeExpense = findViewById(R.id.seeExpense);
+        seeExpense.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String id = String.valueOf(item.getId());
+                Intent intent = new Intent(UpdateAndDeleteActivity.this, Activity_Expense.class);
+                intent.putExtra("get_trip_id",id);
+                startActivity(intent);
+            }
+        });
+
         Intent intent = getIntent();
         item =(Item) intent.getSerializableExtra("item");
         eName.setText(item.getName());
@@ -97,7 +106,7 @@ public class UpdateAndDeleteActivity extends AppCompatActivity implements View.O
             if(view==btnDelete){
                 int id=item.getId();
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                builder.setTitle("Deleted");
+                builder.setTitle("DELETED");
                 builder.setMessage("Are you sure to delete "+item.getName()+"?");
                 builder.setIcon(R.drawable.ic_baseline_delete_24);
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {

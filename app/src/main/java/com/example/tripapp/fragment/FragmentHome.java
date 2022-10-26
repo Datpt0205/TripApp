@@ -2,6 +2,7 @@ package com.example.tripapp.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +56,7 @@ public class FragmentHome extends Fragment implements RecycleViewAdapter.ItemLis
     public void onItemClick(View view, int position) {
         Item item = adapter.getItem(position);
         Intent intent = new Intent(getActivity(), UpdateAndDeleteActivity.class);
+
         intent.putExtra("item", item);
         startActivity(intent);
     }
@@ -62,9 +64,6 @@ public class FragmentHome extends Fragment implements RecycleViewAdapter.ItemLis
     @Override
     public void onResume() {
         super.onResume();
-//        Date d = new Date();
-//        SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy");
-//        List<Item> list= db.getByDate(f.format(d));
         List<Item> list = db.getAll();
         adapter.setList(list);
     }
