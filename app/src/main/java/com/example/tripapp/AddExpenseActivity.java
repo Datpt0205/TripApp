@@ -36,8 +36,29 @@ public class AddExpenseActivity extends AppCompatActivity implements View.OnClic
         addDetailExpense.setOnClickListener(this);
         trip_id = getIntent().getStringExtra("get_id");
         getTripId();
+        eTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Calendar c = Calendar.getInstance();
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+                DatePickerDialog dialog = new DatePickerDialog(AddExpenseActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker date, int y, int m, int d) {
+                        String time = "";
+                        if (m > 8) {
+                            time = d + "/" + (m + 1) + "/" + y;
+                        } else {
+                            time = d + "/0" + (m + 1) + "/" + y;
+                        }
+                        eTime.setText(time);
+                    }
+                }, year, month, day);
+                dialog.show();
+            }
+        });
     }
-
     private void initView() {
         sp = findViewById(R.id.expenseAddType);
         eAmount = findViewById(R.id.expenseAddAmount);
@@ -50,41 +71,22 @@ public class AddExpenseActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View view) {
-        if (view == eTime) {
-            final Calendar c = Calendar.getInstance();
-            int year = c.get(Calendar.YEAR);
-            int month = c.get(Calendar.MONTH);
-            int day = c.get(Calendar.DAY_OF_MONTH);
-            DatePickerDialog dialog = new DatePickerDialog(AddExpenseActivity.this, new DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker datePicker, int y, int m, int d) {
-                    String time = "";
-                    if (m > 8) {
-                        time = d + "/" + (m + 1) + "/" + y;
-                    } else {
-                        time = d + "/0" + (m + 1) + "/" + y;
-                    }
-                    eTime.setText(time);
-                }
-            }, year, month, day);
-            dialog.show();
-        }
-
         if (view == btnExpenseCancel) {
             finish();
         }
-
         if (view == addDetailExpense) {
             String id = trip_id;
             String expenseType = sp.getSelectedItem().toString();
             String expenseAmount = eAmount.getText().toString();
             String expenseTime = eTime.getText().toString();
-            if (!expenseType.isEmpty() && !expenseAmount.isEmpty() && !expenseTime.isEmpty()) {
+         if (!expenseType.isEmpty() && !expenseAmount.isEmpty() && !expenseTime.isEmpty()) {
                 DatabaseHelper db = new DatabaseHelper(AddExpenseActivity.this);
                 db.addExpense(id, expenseType, expenseAmount, expenseTime);
                 Intent new_intent = new Intent(AddExpenseActivity.this,Activity_Expense.class);
                 new_intent.putExtra("get_trip_id",trip_id);
                 startActivity(new_intent);
+            }else{
+                Toast.makeText(this, "You need to fill all required field", Toast.LENGTH_SHORT).show();
             }
         }
     }

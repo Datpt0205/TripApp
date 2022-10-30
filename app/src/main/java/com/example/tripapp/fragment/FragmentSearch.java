@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -121,7 +122,9 @@ public class FragmentSearch extends Fragment implements View.OnClickListener {
         if(view==btnSearch){
             String from = eFrom.getText().toString();
             String to = eTo.getText().toString();
-            if(!from.isEmpty()&&!to.isEmpty()){
+            if(from.isEmpty() && to.isEmpty()){
+                Toast.makeText(getContext().getApplicationContext(), "You need to choose From day and To day", Toast.LENGTH_SHORT).show();
+            }else{
                 List<Item> list = db.searchByDate(from, to);
                 adapter.setList(list);
             }

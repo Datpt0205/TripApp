@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.tripapp.adapter.ExpenseAdapter;
@@ -31,6 +32,7 @@ public class Activity_Expense extends AppCompatActivity {
     ExpenseAdapter expenseAdapter;
     DatabaseHelper myDb;
     Item item;
+    Button expenseCancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,13 @@ public class Activity_Expense extends AppCompatActivity {
         setContentView(R.layout.activity_epense);
         recyclerView = findViewById(R.id.expenseView);
         trip_id = getIntent().getStringExtra("get_trip_id");
+        expenseCancel = findViewById(R.id.expenseCancel);
+        expenseCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         fab_expense = findViewById(R.id.fab_expense);
         fab_expense.setOnClickListener(new View.OnClickListener() {
             @Override
